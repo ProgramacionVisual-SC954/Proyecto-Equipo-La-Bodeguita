@@ -16,7 +16,7 @@ Imports System.Reflection
 <Assembly: System.Reflection.AssemblyCompanyAttribute("LaBodeguita"),  _
  Assembly: System.Reflection.AssemblyConfigurationAttribute("Debug"),  _
  Assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0"),  _
- Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0"),  _
+ Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8a3d3c0125ca4ab8c57599bc727a70cfe01e4ad5"),  _
  Assembly: System.Reflection.AssemblyProductAttribute("LaBodeguita"),  _
  Assembly: System.Reflection.AssemblyTitleAttribute("LaBodeguita"),  _
  Assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0"),  _
