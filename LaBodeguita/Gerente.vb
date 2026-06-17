@@ -4,10 +4,18 @@ Public Class Gerente
     Private _bono As Decimal
     Private _personasACargo As Integer
 
-    Public Sub New(nombre As String, apellido As String, id As String, salarioBase As Decimal, bono As Decimal, personasACargo As Integer)
-        MyBase.New(nombre, apellido, id, salarioBase)
-        _bono = bono
-        _personasACargo = personasACargo
+    Public Sub New(nombre As String,
+                   apellido As String,
+                   rfc As String,
+                   salarioBase As Decimal,
+                   bono As Decimal,
+                   personasACargo As Integer)
+
+        MyBase.New(nombre, apellido, rfc, salarioBase)
+
+        Me.Bono = bono
+        Me.PersonasACargo = personasACargo
+
     End Sub
 
     Public Property Bono As Decimal
@@ -15,11 +23,13 @@ Public Class Gerente
             Return _bono
         End Get
         Set(value As Decimal)
-            If value >= 0 Then
-                _bono = value
-            Else
-                Throw New ArgumentException("El bono no puede ser negativo.")
+
+            If value < 0 Then
+                Throw New Exception("El bono no puede ser negativo.")
             End If
+
+            _bono = value
+
         End Set
     End Property
 
@@ -28,19 +38,33 @@ Public Class Gerente
             Return _personasACargo
         End Get
         Set(value As Integer)
-            If value >= 0 Then
-                _personasACargo = value
-            Else
-                Throw New ArgumentException("Las personas a cargo no pueden ser negativas.")
+
+            If value < 0 Then
+                Throw New Exception("Las personas a cargo no pueden ser negativas.")
             End If
+
+            _personasACargo = value
+
         End Set
     End Property
 
     Public Overrides Function CalcularPagoMensual() As Decimal
-        Return SalarioBase + _bono
+
+        Return SalarioBase + Bono
+
     End Function
 
     Public Overrides Function ObtenerFicha() As String
-        Return $"[GERENTE] {Nombre} {Apellido} | ID: {Id} | Salario Base: {SalarioBase:C} | Bono: {_bono:C} | Personas a cargo: {_personasACargo} | Pago Mensual: {CalcularPagoMensual():C}"
+
+        Return MyBase.ObtenerFicha() &
+               vbCrLf & "Tipo: Gerente" &
+               vbCrLf & "Bono: " &
+               ModuloValidaciones.FormatearMoneda(Bono) &
+               vbCrLf & "Personas a Cargo: " &
+               PersonasACargo &
+               vbCrLf & "Pago Mensual: " &
+               ModuloValidaciones.FormatearMoneda(CalcularPagoMensual())
+
     End Function
+
 End Class
